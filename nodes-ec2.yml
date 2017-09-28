@@ -1,8 +1,8 @@
 ---
 nodes:
-  - name: jboss
-    role: jboss
-    app_name: jboss_standalone
+  - name: rhosp
+    role: rhosp
+    app_name: rhosp_standalone
     instance_type: t2.micro
     image: ami-85241def #rhel7
     volumes:
