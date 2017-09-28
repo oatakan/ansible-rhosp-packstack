@@ -1,0 +1,28 @@
+---
+#- name: add hosts entry
+#  lineinfile:
+#    dest: /etc/hosts
+#    line: "{{ ansible_default_ipv4.address }}  {{ ansible_fqdn }}  {{ ansible_hostname }}"
+
+- name: set hostname to inventory name
+  hostname:
+    name: "{{ inventory_hostname }}"
+  when: set_hostname is defined and set_hostname == yes
+
+- name: build hosts file
+  lineinfile: dest=/etc/hosts regexp='.*{{ item }}$' line="{{ hostvars[item].ansible_default_ipv4.address }} {{ item }}" state=present
+  when: hostvars[item].ansible_default_ipv4.address is defined
+  with_items: "{{ play_hosts }}"
+
+- name: install chrony for time sync
+  yum:
+    name: chrony
+    state: latest
+  tags:
+  - chrony
+
+- name: enable chronyd
+  service:
+    name: chronyd
+    state: started
+    enabled: yes

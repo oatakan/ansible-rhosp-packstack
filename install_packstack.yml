@@ -1,0 +1,6 @@
+- hosts: all
+  become: yes
+  roles:
+  - ansible-role-rhn
+  - common
+  - ansible-role-rhosp-packstack

@@ -1,0 +1,11 @@
+- src: https://github.com/oatakan/ansible-role-ec2
+  version: origin/master
+
+- src: https://github.com/oatakan/ansible-role-vmware
+  version: origin/master
+
+- src: https://github.com/oatakan/ansible-role-rhosp-packstack
+  version: origin/master
+
+- src: https://github.com/oatakan/ansible-role-rhn
+  version: origin/master
