@@ -21,15 +21,7 @@
     file_type: file
   register: interface_files
 
-- debug:
-    var: ansible_interfaces
-
-- name: debug list of ifcfg files
-  debug:
-    msg: "{{ item.path }}"
-  with_items: "{{ interface_files.files }}"
-
-- name: remove extraneous interface config files
+- name: remove extraneous interface config files if exist
   file:
     path: "{{ item.path }}"
     state: absent
