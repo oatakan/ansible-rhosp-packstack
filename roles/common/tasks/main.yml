@@ -14,21 +14,26 @@
   when: hostvars[item].ansible_default_ipv4.address is defined
   with_items: "{{ play_hosts }}"
 
+- name: find files
+  find:
+    path: "/etc/sysconfig/network-scripts"
+    patterns: 'ifcfg-*'
+    file_type: file
+  register: interface_files
+
 - debug:
     var: ansible_interfaces
 
 - name: debug list of ifcfg files
   debug:
     msg: "{{ item }}"
-  with_fileglob:
-    - "/etc/sysconfig/network-scripts/ifcfg-*"
+  with_items: "{{ interface_files }}"
 
 - name: remove extraneous interface config files
   file:
     path: "{{ item }}"
     state: absent
-  with_fileglob:
-    - "/etc/sysconfig/network-scripts/ifcfg-*"
+  with_items: "{{ interface_files }}"
   when: not (item | regex_replace('^.*ifcfg-','')) in ansible_interfaces | map('replace', '-','_') | list
 
 - name: install chrony for time sync
