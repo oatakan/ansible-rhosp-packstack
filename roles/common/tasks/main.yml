@@ -27,14 +27,14 @@
 - name: debug list of ifcfg files
   debug:
     msg: "{{ item }}"
-  with_items: "{{ interface_files.files }}"
+  with_items: "{{ interface_files.files.path }}"
 
 - name: remove extraneous interface config files
   file:
-    path: "{{ item }}"
+    path: "{{ item.files.path }}"
     state: absent
   with_items: "{{ interface_files }}"
-  when: not (item | regex_replace('^.*ifcfg-','')) in ansible_interfaces | map('replace', '-','_') | list
+  when: not (item.files.path | regex_replace('^.*ifcfg-','')) in ansible_interfaces | map('replace', '-','_') | list
 
 - name: install chrony for time sync
   yum:
