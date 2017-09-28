@@ -20,8 +20,8 @@
 - name: debug list of ifcfg files
   debug:
     msg: "{{ item }}"
-    with_fileglob:
-      - "/etc/sysconfig/network-scripts/ifcfg-*"
+  with_fileglob:
+    - "/etc/sysconfig/network-scripts/ifcfg-*"
 
 - name: remove extraneous interface config files
   file:
