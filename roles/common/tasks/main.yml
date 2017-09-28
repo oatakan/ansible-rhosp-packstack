@@ -14,6 +14,17 @@
   when: hostvars[item].ansible_default_ipv4.address is defined
   with_items: "{{ play_hosts }}"
 
+- debug:
+    var: ansible_interfaces
+
+- name: remove extraneous interface config files
+  file:
+    path: "{{ item }}"
+    state: absent
+  with_fileglob:
+    - "/etc/sysconfig/network-scripts/ifcfg-*"
+  when: not item in ansible_interfaces | map('replace', '-','_') | list
+
 - name: install chrony for time sync
   yum:
     name: chrony
