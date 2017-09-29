@@ -20,7 +20,7 @@ nodes:
     dns_servers:
     - 192.168.1.254
     - 8.8.4.4
-    memory: 8192
+    memory: 12288
     cpu: 2
     template: rhel74-x64-bigdisk
     snapshot_src: Linked
