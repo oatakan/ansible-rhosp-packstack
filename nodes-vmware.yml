@@ -22,6 +22,6 @@ nodes:
     - 8.8.4.4
     memory: 12288
     cpu: 2
-    template: rhel74-x64-bigdisk
+    template: centos75-x64-bigdisk
     snapshot_src: Linked
     linked_clone: True
