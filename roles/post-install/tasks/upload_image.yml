@@ -1,0 +1,33 @@
+---
+- name: extract images
+  unarchive:
+    src: "/{{ image_location }}/{{ os_image.filename }}"
+    dest: "/tmp/{{ os_image.filename }}"
+    remote_src: yes
+  when: '.gz' in os_image.filename
+
+- name: upload images non gz
+  os_image:
+    name: "{{ os_image.name }}"
+    container_format: "{{ os_image.container_format }}"
+    disk_format: "{{ os_image.disk_format }}"
+    state: present
+    filename: "/{{ image_location }}/{{ os_image.filename }}"
+    properties: "{{ os_image.properties }}"
+  when: '.gz' not in os_image.filename
+
+- name: upload images gz
+  os_image:
+    name: "{{ os_image.name }}"
+    container_format: "{{ os_image.container_format }}"
+    disk_format: "{{ os_image.disk_format }}"
+    state: present
+    filename: "/tmp/{{ os_image.filename }}"
+    properties: "{{ os_image.properties }}"
+  when: '.gz' in os_image.filename
+
+- name: Remove temp file
+  file:
+    state: absent
+    path: "/tmp/{{ os_image.filename }}"
+  when: '.gz' in os_image.filename

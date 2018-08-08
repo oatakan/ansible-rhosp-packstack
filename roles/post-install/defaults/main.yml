@@ -1,4 +1,7 @@
 ---
+nfs_share: ''
+image_location: "{{ nfs_share }}/images"
+
 os_images:
   - name: windows 2012 r2 v2
     container_format: bare
@@ -8,3 +11,4 @@ os_images:
     properties:
       cpu_arch: x64_64
       os_type: windows
+

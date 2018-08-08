@@ -1,14 +1,29 @@
 ---
-- name: extract images
-  unarchive: "
-
-- name: upload images
-  os_image:
-    name: "{{ item.name }}"
-    container_format: "{{ item.container_format }}"
-    disk_format: "{{ item.disk_format }}"
+- name: add a new key pair
+  os_keypair:
+    name: "{{ os_key_pair_name }}"
+    public_key: "{{ os_key_pair_public_key }}"
     state: present
-    filename: "{{ item.filename }}"
-    properties: "{{ item.properties }}"
-  with_items:
-      - "{{ os_images }}"
+
+- name: mount share if applicable
+  mount:
+    path: /mnt
+    src: "{{ nfs_share }}"
+    fstype: nfs
+    opts: nolock
+    state: mounted
+  when: nfs_share
+
+- include: upload_image.yml os_image='{{ include_item }}'
+  with_items: '{{ os_images }}'
+  loop_control:
+    loop_var: include_item
+
+- name: unmount share if applicable
+  mount:
+    path: /mnt
+    src: "{{ nfs_share }}"
+    fstype: nfs
+    opts: nolock
+    state: absent
+  when: nfs_share
