@@ -4,3 +4,4 @@
   - ansible-role-rhn
   - common
   - ansible-role-rhosp-packstack
+  - post-install

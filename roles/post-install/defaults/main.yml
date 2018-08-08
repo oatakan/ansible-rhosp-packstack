@@ -1,0 +1,10 @@
+---
+os_images:
+  - name: windows 2012 r2 v2
+    container_format: bare
+    disk_format: qcow2
+    state: present
+    filename: windows-2012-r2-v2-cloud-kvm.qcow2.gz
+    properties:
+      cpu_arch: x64_64
+      os_type: windows

@@ -1,0 +1,14 @@
+---
+- name: extract images
+  unarchive: "
+
+- name: upload images
+  os_image:
+    name: "{{ item.name }}"
+    container_format: "{{ item.container_format }}"
+    disk_format: "{{ item.disk_format }}"
+    state: present
+    filename: "{{ item.filename }}"
+    properties: "{{ item.properties }}"
+  with_items:
+      - "{{ os_images }}"
