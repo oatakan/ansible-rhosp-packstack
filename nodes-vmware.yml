@@ -16,10 +16,11 @@ nodes:
       dns_servers:
       - 192.168.1.254
       - 8.8.4.4
-    domain: home.ad
-    dns_servers:
-    - 192.168.1.254
-    - 8.8.4.4
+    customization:
+      domain: home.ad
+      dns_servers:
+      - 192.168.1.254
+      - 8.8.4.4
     memory: 12288
     cpu: 2
     template: centos75-x64-bigdisk
