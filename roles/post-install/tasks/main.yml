@@ -1,4 +1,14 @@
 ---
+- name: install python-pip package
+  yum:
+    name: python-pip
+    state: present
+
+- name: install the latest version of openstacksdk
+  pip:
+    name: openstack
+    state: latest
+
 - name: add a new key pair
   os_keypair:
     name: "{{ os_key_pair_name }}"

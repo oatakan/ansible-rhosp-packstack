@@ -28,7 +28,7 @@
   with_items: "{{ interface_files.files }}"
   when: not (item.path | regex_replace('^.*ifcfg-','')) in ansible_interfaces | map('replace', '-','_') | list
 
-- name: install chrony for time sync
+- name: install packages for time sync
   yum:
     name: chrony
     state: latest
