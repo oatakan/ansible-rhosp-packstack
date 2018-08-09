@@ -9,7 +9,6 @@
     name: "{{ item }}"
     state: latest
   with_items:
-    - pip
     - openstacksdk
 
 - name: add a new key pair
