@@ -4,10 +4,13 @@
     name: python-pip
     state: present
 
-- name: install the latest version of openstacksdk
+- name: install the required pip packages
   pip:
-    name: openstack
+    name: "{{ item }}"
     state: latest
+  with_items:
+    - pip
+    - openstacksdk
 
 - name: add a new key pair
   os_keypair:
