@@ -1,5 +1,5 @@
 - hosts: all
-  become: yes
+  become: no
   tasks:
     - name: list os flavors
       os_flavor_facts:
