@@ -8,11 +8,6 @@
 
 - name: upload images non gz
   os_image:
-    auth:
-      auth_url: "{{ clouds.devstack.auth.auth_url }}"
-      username: "{{ clouds.devstack.auth.username }}"
-      password: "{{ clouds.devstack.auth.password }}"
-      project_name: "{{ clouds.devstack.auth.project_name }}"
     name: "{{ os_image.name }}"
     container_format: "{{ os_image.container_format }}"
     disk_format: "{{ os_image.disk_format }}"
@@ -23,11 +18,6 @@
 
 - name: upload images gz
   os_image:
-    auth:
-      auth_url: "{{ clouds.devstack.auth.auth_url }}"
-      username: "{{ clouds.devstack.auth.username }}"
-      password: "{{ clouds.devstack.auth.password }}"
-      project_name: "{{ clouds.devstack.auth.project_name }}"
     name: "{{ os_image.name }}"
     container_format: "{{ os_image.container_format }}"
     disk_format: "{{ os_image.disk_format }}"

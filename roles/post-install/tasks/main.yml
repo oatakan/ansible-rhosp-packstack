@@ -13,13 +13,8 @@
 
 - name: add a new key pair
   os_keypair:
-    auth:
-      auth_url: "{{ clouds.devstack.auth.auth_url }}"
-      username: "{{ clouds.devstack.auth.username }}"
-      password: "{{ clouds.devstack.auth.password }}"
-      project_name: "{{ clouds.devstack.auth.project_name }}"
-    name: "abc"
-    public_key: "abc"
+    name: "{{ os_key_pair_name }}"
+    public_key: "{{ os_key_pair_public_key }}"
     state: present
 
 - name: mount share if applicable
