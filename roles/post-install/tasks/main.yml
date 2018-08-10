@@ -16,6 +16,7 @@
     name: "{{ os_key_pair_name }}"
     public_key: "{{ os_key_pair_public_key }}"
     state: present
+  ignore_errors: yes
 
 - name: mount share if applicable
   mount:
