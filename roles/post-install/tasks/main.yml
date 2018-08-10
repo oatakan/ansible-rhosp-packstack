@@ -11,11 +11,15 @@
   with_items:
     - openstacksdk
 
+#- name: add a new key pair
+#  os_keypair:
+#    name: "{{ os_key_pair_name }}"
+#    public_key: "{{ os_key_pair_public_key }}"
+#    state: present
+#  ignore_errors: yes
+
 - name: add a new key pair
-  os_keypair:
-    name: "{{ os_key_pair_name }}"
-    public_key: "{{ os_key_pair_public_key }}"
-    state: present
+  shell: source /root/keystonerc_admin && openstack keypair create --public-key "{{ os_key_pair_public_key }}" "{{ os_key_pair_name }}"
   ignore_errors: yes
 
 - name: mount share if applicable
@@ -35,8 +39,5 @@
 - name: unmount share if applicable
   mount:
     path: /mnt
-    src: "{{ nfs_share }}"
-    fstype: nfs
-    opts: nolock
-    state: absent
+    state: unmounted
   when: nfs_share is defined
