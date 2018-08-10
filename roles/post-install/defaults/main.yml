@@ -1,6 +1,6 @@
 ---
 nfs_share: ''
-image_location: "{{ nfs_share }}/images"
+image_location: "/mnt/images"
 
 os_images:
   - name: windows 2012 r2 v2
