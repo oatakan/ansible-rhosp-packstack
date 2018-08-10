@@ -4,6 +4,7 @@
     - name: list os flavors
       os_flavor_facts:
       register: os_flavors
+      delegate_to: localhost
 
     - name: debug os_flavors
       debug:
