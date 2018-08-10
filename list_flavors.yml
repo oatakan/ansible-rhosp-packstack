@@ -1,0 +1,10 @@
+- hosts: all
+  become: yes
+  tasks:
+    - name: list os flavors
+      os_flavor_facts:
+      register: os_flavors
+
+    - name: debug os_flavors
+      debug:
+        var: os_flavors
