@@ -1,4 +1,8 @@
 ---
+- name: check openstack variables
+  debug:
+    msg: "OS_AUTH_URL: {{ lookup('env','OS_AUTH_URL') }}, OS_PROJECT_DOMAIN_NAME: {{ lookup('env','OS_PROJECT_DOMAIN_NAME') }}, OS_PROJECT_NAME: {{ lookup('env','OS_PROJECT_NAME') }}, OS_USERNAME: {{ lookup('env','OS_USERNAME') }}, OS_USER_DOMAIN_NAME: {{ lookup('env','OS_USER_DOMAIN_NAME') }}, OS_IDENTITY_API_VERSION: {{ lookup('env','OS_IDENTITY_API_VERSION') }}"
+
 # for osp-13 installation, need to restart nova and cinder services
 - name: restart services
   service:
@@ -29,10 +33,6 @@
     state: latest
   with_items:
     - openstacksdk
-
-- name: check openstack variables
-  debug:
-    msg: "OS_AUTH_URL: {{ lookup('env','OS_AUTH_URL') }}, OS_PROJECT_DOMAIN_NAME: {{ lookup('env','OS_PROJECT_DOMAIN_NAME') }}, OS_PROJECT_NAME: {{ lookup('env','OS_PROJECT_NAME') }}, OS_USERNAME: {{ lookup('env','OS_USERNAME') }}, OS_USER_DOMAIN_NAME: {{ lookup('env','OS_USER_DOMAIN_NAME') }}, OS_IDENTITY_API_VERSION: {{ lookup('env','OS_IDENTITY_API_VERSION') }}"
 
 - name: add a new key pair
   os_keypair:
