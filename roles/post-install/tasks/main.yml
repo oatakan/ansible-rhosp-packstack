@@ -21,6 +21,7 @@
     name: "{{ os_key_pair_name }}"
     public_key: "{{ os_key_pair_public_key }}"
     state: present
+  delegate_to: localhost
 
 - name: mount share if applicable
   mount:
