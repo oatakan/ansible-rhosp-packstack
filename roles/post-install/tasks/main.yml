@@ -25,7 +25,7 @@
     fstype: nfs
     opts: nolock
     state: mounted
-  when: nfs_share
+  when: nfs_share is defined
 
 - include: upload_image.yml os_image='{{ include_item }}'
   with_items: '{{ os_images }}'
@@ -39,4 +39,4 @@
     fstype: nfs
     opts: nolock
     state: absent
-  when: nfs_share
+  when: nfs_share is defined
