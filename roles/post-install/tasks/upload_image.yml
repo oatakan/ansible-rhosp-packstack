@@ -22,12 +22,12 @@
     container_format: "{{ os_image.container_format }}"
     disk_format: "{{ os_image.disk_format }}"
     state: present
-    filename: "/tmp/{{ os_image.filename | regex_replace('\.gz$') }}"
+    filename: "/tmp/{{ os_image.filename | regex_replace('\\.gz$') }}"
     properties: "{{ os_image.properties }}"
   when: os_image.filename | regex_search('.*\.gz$')
 
 - name: Remove temp file
   file:
     state: absent
-    path: "/tmp/{{ os_image.filename | regex_replace('\.gz$') }}"
+    path: "/tmp/{{ os_image.filename | regex_replace('\\.gz$') }}"
   when: os_image.filename | regex_search('.*\.gz$')
