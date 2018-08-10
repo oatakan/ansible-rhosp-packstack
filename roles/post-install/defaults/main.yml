@@ -11,4 +11,12 @@ os_images:
     properties:
       cpu_arch: x64_64
       os_type: windows
+  - name: windows 2016
+    container_format: bare
+    disk_format: qcow2
+    state: present
+    filename: windows-2016-cloud-kvm.qcow2.gz
+    properties:
+      cpu_arch: x64_64
+      os_type: windows
 
