@@ -1,10 +1,10 @@
 ---
-- name: extract images
-  unarchive:
-    src: "/{{ image_location }}/{{ os_image.filename }}"
-    dest: "/tmp"
-    remote_src: yes
-  when: os_image.filename | regex_search('.*\.gz$')
+#- name: extract images
+#  unarchive:
+#    src: "/{{ image_location }}/{{ os_image.filename }}"
+#    dest: "/tmp"
+#    remote_src: yes
+#  when: os_image.filename | regex_search('.*\.gz$')
 
 - name: upload images non gz
   os_image:
@@ -17,17 +17,21 @@
   when: not os_image.filename | regex_search('.*\.gz$')
 
 - name: upload images gz
-  os_image:
-    name: "{{ os_image.name }}"
-    container_format: "{{ os_image.container_format }}"
-    disk_format: "{{ os_image.disk_format }}"
-    state: present
-    filename: "/tmp/{{ os_image.filename | regex_replace('\\.gz$') }}"
-    properties: "{{ os_image.properties }}"
+  command: source /root/keystonerc_admin && gunzip -cd "/{{ image_location }}/{{ os_image.filename }}" | glance image-create --property hypervisor_type=QEMU --name "{{ os_image.name }}" --container-format "{{ os_image.container_format }}" --disk-format "{{ os_image.disk_format }}" --property os_type="{{ os_image.properties['os_type'] }}"
   when: os_image.filename | regex_search('.*\.gz$')
 
-- name: Remove temp file
-  file:
-    state: absent
-    path: "/tmp/{{ os_image.filename | regex_replace('\\.gz$') }}"
-  when: os_image.filename | regex_search('.*\.gz$')
+#- name: upload images gz
+#  os_image:
+#    name: "{{ os_image.name }}"
+#    container_format: "{{ os_image.container_format }}"
+#    disk_format: "{{ os_image.disk_format }}"
+#    state: present
+#    filename: "/tmp/{{ os_image.filename | regex_replace('\\.gz$') }}"
+#    properties: "{{ os_image.properties }}"
+#  when: os_image.filename | regex_search('.*\.gz$')
+
+#- name: Remove temp file
+#  file:
+#    state: absent
+#    path: "/tmp/{{ os_image.filename | regex_replace('\\.gz$') }}"
+#  when: os_image.filename | regex_search('.*\.gz$')
