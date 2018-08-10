@@ -3,7 +3,7 @@ nfs_share: ''
 image_location: "/mnt/images"
 
 os_images:
-  - name: windows 2012 r2 v2
+  - name: Windows Server 2012 r2 v2
     container_format: bare
     disk_format: qcow2
     state: present
@@ -11,7 +11,7 @@ os_images:
     properties:
       cpu_arch: x64_64
       os_type: windows
-  - name: windows 2016
+  - name: Windows Server 2016
     container_format: bare
     disk_format: qcow2
     state: present
