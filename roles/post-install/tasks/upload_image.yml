@@ -2,7 +2,7 @@
 - name: extract images
   unarchive:
     src: "/{{ image_location }}/{{ os_image.filename }}"
-    dest: "/tmp/{{ os_image.filename }}"
+    dest: "/tmp"
     remote_src: yes
   when: os_image.filename | regex_search('.*\.gz$')
 
@@ -22,12 +22,12 @@
     container_format: "{{ os_image.container_format }}"
     disk_format: "{{ os_image.disk_format }}"
     state: present
-    filename: "/tmp/{{ os_image.filename }}"
+    filename: "/tmp/{{ os_image.filename | regex_replace('\.gz$') }}"
     properties: "{{ os_image.properties }}"
   when: os_image.filename | regex_search('.*\.gz$')
 
 - name: Remove temp file
   file:
     state: absent
-    path: "/tmp/{{ os_image.filename }}"
+    path: "/tmp/{{ os_image.filename | regex_replace('\.gz$') }}"
   when: os_image.filename | regex_search('.*\.gz$')
