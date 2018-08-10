@@ -18,9 +18,19 @@
 #    state: present
 #  ignore_errors: yes
 
+- name: copy public key
+  copy:
+    content: "{{ os_key_pair_public_key }}"
+    dest: "/tmp/{{ os_key_pair_name }}-pub-key"
+
 - name: add a new key pair
-  shell: source /root/keystonerc_admin && openstack keypair create --public-key "{{ os_key_pair_public_key }}" "{{ os_key_pair_name }}"
+  shell: source /root/keystonerc_admin && openstack keypair create --public-key "/tmp/{{ os_key_pair_name }}-pub-key" "{{ os_key_pair_name }}"
   ignore_errors: yes
+
+- name: remove public key
+  file:
+    path: "/tmp/{{ os_key_pair_name }}-pub-key"
+    state: absent
 
 - name: mount share if applicable
   mount:
