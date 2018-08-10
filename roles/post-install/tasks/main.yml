@@ -39,6 +39,7 @@
     name: "{{ os_key_pair_name }}"
     public_key: "{{ os_key_pair_public_key }}"
     state: present
+  become: no
   ignore_errors: yes
 
 #- name: copy public key

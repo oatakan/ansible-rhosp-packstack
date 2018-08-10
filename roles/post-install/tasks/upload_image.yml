@@ -1,6 +1,7 @@
 ---
 - name: check if image exists
-  shell: source /root/keystonerc_admin && openstack image list | grep "{{ os_image.name }}" | grep active
+  shell: openstack image list | grep "{{ os_image.name }}" | grep active
+  become: no
   register: check_image
   ignore_errors: yes
 
@@ -20,12 +21,14 @@
     state: present
     filename: "/{{ image_location }}/{{ os_image.filename }}"
     properties: "{{ os_image.properties }}"
+  become: no
   when:
     - not check_image is success
     - not os_image.filename | regex_search('.*\.gz$')
 
 - name: upload images gz
-  shell: source /root/keystonerc_admin && gunzip -cd "{{ image_location }}/{{ os_image.filename }}" | glance image-create --property hypervisor_type=QEMU --name "{{ os_image.name }}" --container-format "{{ os_image.container_format }}" --disk-format "{{ os_image.disk_format }}" --property os_type="{{ os_image.properties['os_type'] }}"
+  shell: gunzip -cd "{{ image_location }}/{{ os_image.filename }}" | glance image-create --property hypervisor_type=QEMU --name "{{ os_image.name }}" --container-format "{{ os_image.container_format }}" --disk-format "{{ os_image.disk_format }}" --property os_type="{{ os_image.properties['os_type'] }}"
+  become: no
   when:
     - not check_image is success
     - os_image.filename | regex_search('.*\.gz$')
@@ -38,6 +41,7 @@
 #    state: present
 #    filename: "/tmp/{{ os_image.filename | regex_replace('\\.gz$') }}"
 #    properties: "{{ os_image.properties }}"
+#  become: no
 #  when: os_image.filename | regex_search('.*\.gz$')
 
 #- name: Remove temp file
