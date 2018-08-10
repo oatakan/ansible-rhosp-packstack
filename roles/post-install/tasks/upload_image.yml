@@ -17,7 +17,7 @@
   when: not os_image.filename | regex_search('.*\.gz$')
 
 - name: upload images gz
-  command: source /root/keystonerc_admin && gunzip -cd "/{{ image_location }}/{{ os_image.filename }}" | glance image-create --property hypervisor_type=QEMU --name "{{ os_image.name }}" --container-format "{{ os_image.container_format }}" --disk-format "{{ os_image.disk_format }}" --property os_type="{{ os_image.properties['os_type'] }}"
+  command: source /root/keystonerc_admin && gunzip -cd "{{ image_location }}/{{ os_image.filename }}" | glance image-create --property hypervisor_type=QEMU --name "{{ os_image.name }}" --container-format "{{ os_image.container_format }}" --disk-format "{{ os_image.disk_format }}" --property os_type="{{ os_image.properties['os_type'] }}"
   when: os_image.filename | regex_search('.*\.gz$')
 
 #- name: upload images gz
