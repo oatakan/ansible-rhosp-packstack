@@ -1,8 +1,8 @@
 ---
-#- name: add hosts entry
-#  lineinfile:
-#    dest: /etc/hosts
-#    line: "{{ ansible_default_ipv4.address }}  {{ ansible_fqdn }}  {{ ansible_hostname }}"
+- name: add hosts entry
+  lineinfile:
+    dest: /etc/hosts
+    line: "{{ ansible_default_ipv4.address }}  {{ ansible_fqdn }}  {{ ansible_hostname }}"
 
 - name: set hostname to inventory name
   hostname:
