@@ -1,23 +1,4 @@
 ---
-# for osp-13 installation, need to restart nova and cinder services
-- name: restart services
-  service:
-    name: "{{ item }}"
-    state: restarted
-  with_items:
-    - openstack-nova-compute
-    - openstack-nova-conductor
-    - openstack-nova-consoleauth
-    - openstack-nova-api
-    - openstack-nova-scheduler
-    - openstack-nova-novncproxy
-    - openstack-glance-registry
-    - openstack-glance-api
-    - openstack-cinder-backup
-    - openstack-cinder-scheduler
-    - openstack-cinder-api
-    - openstack-cinder-volume
-
 - name: install python-pip package
   yum:
     name: python-pip
@@ -70,3 +51,22 @@
     path: /mnt
     state: unmounted
   when: nfs_share is defined
+
+# for osp-13 installation, need to restart nova and cinder services
+- name: restart services
+  service:
+    name: "{{ item }}"
+    state: restarted
+  with_items:
+    - openstack-nova-compute
+    - openstack-nova-conductor
+    - openstack-nova-consoleauth
+    - openstack-nova-api
+    - openstack-nova-scheduler
+    - openstack-nova-novncproxy
+    - openstack-glance-registry
+    - openstack-glance-api
+    - openstack-cinder-backup
+    - openstack-cinder-scheduler
+    - openstack-cinder-api
+    - openstack-cinder-volume
