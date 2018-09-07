@@ -2,6 +2,8 @@
 nfs_share: ''
 image_location: "/mnt/images"
 
+reboot_after_install: yes
+
 os_images:
   - name: Windows Server 2012 r2 v2
     container_format: bare

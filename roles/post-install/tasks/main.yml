@@ -70,3 +70,24 @@
     - openstack-cinder-scheduler
     - openstack-cinder-api
     - openstack-cinder-volume
+  when: not reboot_after_install
+
+- name: reboot
+  shell: "sleep 2 && shutdown -r now 'Rebooting (Ansible)'"
+  async: 1
+  poll: 0
+  ignore_errors: yes
+  when: reboot_after_install
+
+- name: wait for connection
+  wait_for_connection:
+    delay: 30
+  when: reboot_after_install
+
+- name: waiting for keystone to be available
+  wait_for:
+    host: "{{ ansible_host | default(inventory_hostname) }}"
+    port: 5000
+  delegate_to: 127.0.0.1
+  become: no
+  when: reboot_after_install
