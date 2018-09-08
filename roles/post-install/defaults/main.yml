@@ -21,4 +21,20 @@ os_images:
     properties:
       cpu_arch: x64_64
       os_type: windows
+  - name: CentOS 7 1808
+    container_format: bare
+    disk_format: qcow2
+    state: present
+    filename: CentOS-7-x86_64-GenericCloud-1808.qcow2
+    properties:
+      cpu_arch: x64_64
+      os_type: linux
+  - name: RHEL 7.5
+    container_format: bare
+    disk_format: qcow2
+    state: present
+    filename: rhel-server-7.5-update-3-x86_64-kvm.qcow2
+    properties:
+      cpu_arch: x64_64
+      os_type: linux
 
