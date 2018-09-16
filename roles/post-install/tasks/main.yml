@@ -1,4 +1,16 @@
 ---
+
+- name: check openstack config file
+  stat:
+    path: "{{ config_file }}"
+  register: st
+  delegate_to: localhost
+
+- name: include openstack details
+  include_vars: "{{ config_file }}"
+  when: st.stat.exists and st.stat.isreg
+  delegate_to: localhost
+
 - name: install python-pip package
   yum:
     name: python-pip
