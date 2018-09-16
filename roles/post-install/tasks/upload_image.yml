@@ -13,14 +13,20 @@
 #    remote_src: yes
 #  when: os_image.filename | regex_search('.*\.gz$')
 
+#- name: upload images non gz
+#  os_image:
+#    name: "{{ os_image.name }}"
+#    container_format: "{{ os_image.container_format }}"
+#    disk_format: "{{ os_image.disk_format }}"
+#    state: present
+#    filename: "/{{ image_location }}/{{ os_image.filename }}"
+#    properties: "{{ os_image.properties }}"
+#  when:
+#    - not check_image is success
+#    - not os_image.filename | regex_search('.*\.gz$')
+
 - name: upload images non gz
-  os_image:
-    name: "{{ os_image.name }}"
-    container_format: "{{ os_image.container_format }}"
-    disk_format: "{{ os_image.disk_format }}"
-    state: present
-    filename: "/{{ image_location }}/{{ os_image.filename }}"
-    properties: "{{ os_image.properties }}"
+  shell: source /root/keystonerc_admin && glance image-create --file "/{{ image_location }}/{{ os_image.filename }}"  --property hypervisor_type=QEMU --name "{{ os_image.name }}" --container-format "{{ os_image.container_format }}" --disk-format "{{ os_image.disk_format }}" --property os_type="{{ os_image.properties['os_type'] }}"
   when:
     - not check_image is success
     - not os_image.filename | regex_search('.*\.gz$')
