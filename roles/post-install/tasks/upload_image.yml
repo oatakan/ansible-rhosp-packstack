@@ -1,4 +1,14 @@
 ---
+
+- name: check openstack config file
+  stat:
+    path: "{{ config_file }}"
+  register: st
+
+- name: include openstack details
+  include_vars: "{{ config_file }}"
+  when: st.stat.exists and st.stat.isreg
+
 - name: check if image exists
   shell: source /root/keystonerc_admin && openstack image list | grep "{{ os_image.name }}" | grep active
   register: check_image
