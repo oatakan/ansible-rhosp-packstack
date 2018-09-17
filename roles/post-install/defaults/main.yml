@@ -8,19 +8,11 @@ image_location: "/mnt/images"
 reboot_after_install: yes
 
 os_images:
-  - name: Windows Server 2012 r2
+  - name: Windows Server 2012 r2 updated
     container_format: bare
     disk_format: qcow2
     state: present
-    filename: windows-2012-r2-v2-cloud-kvm.qcow2.gz
-    properties:
-      cpu_arch: x64_64
-      os_type: windows
-  - name: Windows Server 2016
-    container_format: bare
-    disk_format: qcow2
-    state: present
-    filename: windows-2016-cloud-kvm.gz
+    filename: windows-2012-r2-cloud-kvm-updated.gz
     properties:
       cpu_arch: x64_64
       os_type: windows
@@ -28,7 +20,7 @@ os_images:
     container_format: bare
     disk_format: qcow2
     state: present
-    filename: windows-2016-cloud-kvm-updated-v2.gz
+    filename: windows-2016-cloud-kvm-updated.gz
     properties:
       cpu_arch: x64_64
       os_type: windows
@@ -36,7 +28,7 @@ os_images:
     container_format: bare
     disk_format: qcow2
     state: present
-    filename: windows-10-cloud-kvm-no-update.gz
+    filename: windows-10-cloud-kvm-base.gz
     properties:
       cpu_arch: x64_64
       os_type: windows
