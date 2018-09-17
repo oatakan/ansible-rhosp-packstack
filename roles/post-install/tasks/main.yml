@@ -71,7 +71,7 @@
   service:
     name: "{{ item }}"
     state: restarted
-  with_items:
+  loop:
     - openstack-nova-compute
     - openstack-nova-conductor
     - openstack-nova-consoleauth
@@ -105,3 +105,8 @@
   delegate_to: 127.0.0.1
   become: no
   when: reboot_after_install
+
+- name: copy restart playbook
+  copy:
+    src: restart.yml
+    dest: /root/restart.yml

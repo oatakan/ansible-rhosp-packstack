@@ -1,0 +1,23 @@
+- name: restart openstack services
+  hosts: localhost
+  connection: local
+  gather_facts: no
+
+  tasks:
+    - name: restart services
+      service:
+        name: "{{ item }}"
+        state: restarted
+      loop:
+        - openstack-nova-compute
+        - openstack-nova-conductor
+        - openstack-nova-consoleauth
+        - openstack-nova-api
+        - openstack-nova-scheduler
+        - openstack-nova-novncproxy
+        - openstack-glance-registry
+        - openstack-glance-api
+        - openstack-cinder-backup
+        - openstack-cinder-scheduler
+        - openstack-cinder-api
+        - openstack-cinder-volume
