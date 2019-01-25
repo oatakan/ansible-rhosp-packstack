@@ -13,6 +13,11 @@
   become: no
   delegate_to: localhost
 
+- name: install epel repo
+  yum:
+    name: epel-release
+    state: present
+
 - name: install python-pip package
   yum:
     name: python-pip
@@ -20,10 +25,8 @@
 
 - name: install the required pip packages
   pip:
-    name: "{{ item }}"
+    name: openstacksdk
     state: latest
-  with_items:
-    - openstacksdk
 
 #- name: add a new key pair
 #  os_keypair:
@@ -56,7 +59,7 @@
   when: nfs_share is defined
 
 - include: upload_image.yml os_image='{{ include_item }}'
-  with_items: '{{ os_images }}'
+  loop: '{{ os_images }}'
   loop_control:
     loop_var: include_item
 
@@ -86,16 +89,8 @@
     - openstack-cinder-volume
   when: not reboot_after_install
 
-- name: reboot
-  shell: "sleep 2 && shutdown -r now 'Rebooting (Ansible)'"
-  async: 1
-  poll: 0
-  ignore_errors: yes
-  when: reboot_after_install
-
-- name: wait for connection
-  wait_for_connection:
-    delay: 30
+- name: reboot system
+  reboot:
   when: reboot_after_install
 
 - name: waiting for keystone to be available
