@@ -91,6 +91,7 @@
 
 - name: reboot system
   reboot:
+    reboot_timeout: 3600
   when: reboot_after_install
 
 - name: waiting for keystone to be available
