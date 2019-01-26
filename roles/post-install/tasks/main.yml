@@ -23,6 +23,12 @@
   yum:
     name: python-pip
     state: present
+  when: ansible_distribution == 'CentOS'
+
+- name: install python-pip package
+  yum:
+    name: python27-python-pip
+    state: present
 
 - name: install the required pip packages
   pip:
