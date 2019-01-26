@@ -29,15 +29,24 @@
   yum:
     name: python27-python-pip
     state: present
-
-- name: Enable pip on RHEL
-  command: scl enable python27 bash
   when: ansible_distribution == 'RedHat'
 
-- name: install the required pip packages
+#- name: Enable pip on RHEL
+#  command: scl enable python27 bash
+#  when: ansible_distribution == 'RedHat'
+
+- name: install the required pip packages on CentOS
   pip:
     name: openstacksdk
     state: latest
+  when: ansible_distribution == 'CentOS'
+
+- name: install the required pip packages on RHEL
+  pip:
+    name: openstacksdk
+    virtualenv_command: scl enable python27 bash
+    state: latest
+  when: ansible_distribution == 'RedHat'
 
 #- name: add a new key pair
 #  os_keypair:
