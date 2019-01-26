@@ -13,22 +13,26 @@
   become: no
   delegate_to: localhost
 
-- name: install epel repo
+- name: install epel repo on CentOS
   yum:
     name: epel-release
     state: present
   when: ansible_distribution == 'CentOS'
 
-- name: install python-pip package
+- name: install python-pip package on CentOS
   yum:
     name: python-pip
     state: present
   when: ansible_distribution == 'CentOS'
 
-- name: install python-pip package
+- name: install python-pip package on RHEL
   yum:
     name: python27-python-pip
     state: present
+
+- name: Enable pip on RHEL
+  shell: scl enable python27 bash
+  when: ansible_distribution == 'Red Hat Enterprise Linux'
 
 - name: install the required pip packages
   pip:
