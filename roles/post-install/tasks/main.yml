@@ -44,7 +44,7 @@
 - name: install the required pip packages on RHEL
   pip:
     name: openstacksdk
-    virtualenv_command: scl enable python27 bash
+    virtualenv_command: /opt/rh/python27/enable
     state: latest
   when: ansible_distribution == 'RedHat'
 
