@@ -17,37 +17,17 @@
   yum:
     name: epel-release
     state: present
-  when: ansible_distribution == 'CentOS'
+#  when: ansible_distribution == 'CentOS'
 
 - name: install python-pip package on CentOS
   yum:
     name: python-pip
     state: present
-  when: ansible_distribution == 'CentOS'
 
-- name: install python-pip package on RHEL
-  yum:
-    name: python27-python-pip
-    state: present
-  when: ansible_distribution == 'RedHat'
-
-#- name: Enable pip on RHEL
-#  command: scl enable python27 bash
-#  when: ansible_distribution == 'RedHat'
-
-- name: install the required pip packages on CentOS
+- name: install the required pip packages
   pip:
     name: openstacksdk
     state: latest
-  when: ansible_distribution == 'CentOS'
-
-- name: install the required pip packages on RHEL
-  pip:
-    name: openstacksdk
-    virtualenv_command: /opt/rh/python27/enable
-    executable: /opt/rh/python27/root/usr/bin/pip
-    state: latest
-  when: ansible_distribution == 'RedHat'
 
 #- name: add a new key pair
 #  os_keypair:
