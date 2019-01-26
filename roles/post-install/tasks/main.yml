@@ -45,6 +45,7 @@
   pip:
     name: openstacksdk
     virtualenv_command: /opt/rh/python27/enable
+    executable: /opt/rh/python27/root/usr/bin/pip
     state: latest
   when: ansible_distribution == 'RedHat'
 
