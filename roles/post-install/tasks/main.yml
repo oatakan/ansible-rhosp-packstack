@@ -17,7 +17,17 @@
   yum:
     name: epel-release
     state: present
-#  when: ansible_distribution == 'CentOS'
+  when: ansible_distribution == 'CentOS'
+
+- name: install epel on RHEL
+  yum:
+    name: https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+    state: present
+  register: install_epel
+  until: '"error" not in install_epel'
+  retries: 5
+  delay: 10
+  when: ansible_distribution == 'RedHat'
 
 - name: install python-pip package on CentOS
   yum:
