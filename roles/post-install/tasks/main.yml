@@ -29,7 +29,7 @@
   delay: 10
   when: ansible_distribution == 'RedHat'
 
-- name: install python-pip package on CentOS
+- name: install python-pip package
   yum:
     name: python-pip
     state: present
