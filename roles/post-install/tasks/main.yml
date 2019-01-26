@@ -30,12 +30,8 @@
     name: python27-python-pip
     state: present
 
-- debug:
-    var: ansible_distribution
-
 - name: Enable pip on RHEL
-  shell: scl enable python27 bash
-  become: yes
+  command: scl enable python27 bash
   when: ansible_distribution == 'RedHat'
 
 - name: install the required pip packages
