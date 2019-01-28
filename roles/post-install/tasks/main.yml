@@ -74,6 +74,15 @@
   loop_control:
     loop_var: include_item
 
+- name: gather facts on images
+  os_image_facts:
+  ignore_errors: yes
+
+- name: show openstack images
+  debug:
+    var: openstack_image
+  when: openstack_image is defined
+
 - name: unmount share if applicable
   mount:
     path: /mnt
