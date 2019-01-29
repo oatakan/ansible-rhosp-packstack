@@ -96,27 +96,6 @@
     var: openstack_image
   when: openstack_image is defined
 
-- pause:
-    minutes: 10
-
-- name: stop services
-  service:
-    name: "{{ item }}"
-    state: stopped
-  loop:
-    - openstack-nova-compute
-    - openstack-nova-conductor
-    - openstack-nova-consoleauth
-    - openstack-nova-api
-    - openstack-nova-scheduler
-    - openstack-nova-novncproxy
-    - openstack-glance-registry
-    - openstack-glance-api
-    - openstack-cinder-backup
-    - openstack-cinder-scheduler
-    - openstack-cinder-api
-    - openstack-cinder-volume
-
 - name: unmount share if applicable
   mount:
     path: /mnt
