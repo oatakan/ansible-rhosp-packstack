@@ -60,6 +60,17 @@
     path: "/tmp/{{ os_key_pair_name }}-pub-key"
     state: absent
 
+- name: gather facts on images
+  os_image_facts:
+  delegate_to: localhost
+  become: no
+  ignore_errors: yes
+
+- name: show openstack images
+  debug:
+    var: openstack_image
+  when: openstack_image is defined
+
 - name: mount share if applicable
   mount:
     path: /mnt
