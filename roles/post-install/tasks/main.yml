@@ -76,6 +76,8 @@
 
 - name: gather facts on images
   os_image_facts:
+  delegate_to: localhost
+  become: no
   ignore_errors: yes
 
 - name: show openstack images
@@ -129,6 +131,8 @@
 
 - name: gather facts on images
   os_image_facts:
+  delegate_to: localhost
+  become: no
   ignore_errors: yes
 
 - name: show openstack images

@@ -1,0 +1,13 @@
+- hosts: all
+  become: yes
+  tasks:
+    - name: gather facts on images
+      os_image_facts:
+      delegate_to: localhost
+      become: no
+      ignore_errors: yes
+
+    - name: show openstack images
+      debug:
+        var: openstack_image
+      when: openstack_image is defined
