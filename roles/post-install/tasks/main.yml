@@ -96,6 +96,9 @@
     var: openstack_image
   when: openstack_image is defined
 
+- pause:
+    minutes: 10
+
 - name: unmount share if applicable
   mount:
     path: /mnt
