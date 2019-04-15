@@ -24,22 +24,22 @@ os_images:
     properties:
       cpu_arch: x64_64
       os_type: windows
-#  - name: Windows Server 2019
-#    container_format: bare
-#    disk_format: qcow2
-#    state: present
-#    filename: windows-2019-standard-core-cloud-kvm.gz
-#    properties:
-#      cpu_arch: x64_64
-#      os_type: windows
-#  - name: Windows 10
-#    container_format: bare
-#    disk_format: qcow2
-#    state: present
-#    filename: windows-10-1809-cloud-kvm.gz
-#    properties:
-#      cpu_arch: x64_64
-#      os_type: windows
+  - name: Windows Server 2019
+    container_format: bare
+    disk_format: qcow2
+    state: present
+    filename: windows-2019-standard-core-cloud-kvm.gz
+    properties:
+      cpu_arch: x64_64
+      os_type: windows
+  - name: Windows 10
+    container_format: bare
+    disk_format: qcow2
+    state: present
+    filename: windows-10-1809-cloud-kvm.gz
+    properties:
+      cpu_arch: x64_64
+      os_type: windows
   - name: CentOS 7 1808
     container_format: bare
     disk_format: qcow2
