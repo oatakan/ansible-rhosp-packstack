@@ -80,10 +80,10 @@
     state: mounted
   when: nfs_share is defined
 
-- include: upload_image.yml os_image='{{ include_item }}'
-  loop: '{{ os_images }}'
-  loop_control:
-    loop_var: include_item
+#- include: upload_image.yml os_image='{{ include_item }}'
+#  loop: '{{ os_images }}'
+#  loop_control:
+#    loop_var: include_item
 
 - name: gather facts on images
   os_image_facts:
