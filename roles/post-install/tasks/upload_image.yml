@@ -26,13 +26,13 @@
 #    - not os_image.filename | regex_search('.*\.gz$')
 
 - name: upload images non gz
-  shell: source /root/keystonerc_admin && glance image-create --file "/{{ image_location }}/{{ os_image.filename }}"  --property hypervisor_type=QEMU --name "{{ os_image.name }}" --container-format "{{ os_image.container_format }}" --disk-format "{{ os_image.disk_format }}" --property os_type="{{ os_image.properties['os_type'] }}"
+  shell: source /root/keystonerc_admin && glance image-create --file "/{{ image_location }}/{{ os_image.filename }}" --name "{{ os_image.name }}" --container-format "{{ os_image.container_format }}" --disk-format "{{ os_image.disk_format }}" --property os_type="{{ os_image.properties['os_type'] }}"
   when:
     - not check_image is success
     - not os_image.filename | regex_search('.*\.gz$')
 
 - name: upload images gz
-  shell: source /root/keystonerc_admin && gunzip -cd "{{ image_location }}/{{ os_image.filename }}" | glance image-create --property hypervisor_type=QEMU --name "{{ os_image.name }}" --container-format "{{ os_image.container_format }}" --disk-format "{{ os_image.disk_format }}" --property os_type="{{ os_image.properties['os_type'] }}"
+  shell: source /root/keystonerc_admin && gunzip -cd "{{ image_location }}/{{ os_image.filename }}" | glance image-create --name "{{ os_image.name }}" --container-format "{{ os_image.container_format }}" --disk-format "{{ os_image.disk_format }}" --property os_type="{{ os_image.properties['os_type'] }}"
   when:
     - not check_image is success
     - os_image.filename | regex_search('.*\.gz$')
