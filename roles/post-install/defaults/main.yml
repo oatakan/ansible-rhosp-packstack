@@ -16,7 +16,7 @@ os_images:
 #    properties:
 #      cpu_arch: x64_64
 #      os_type: windows
-  - name: Windows Server 2016 updated
+  - name: windows-2016-standard-core
     container_format: bare
     disk_format: qcow2
     state: present
@@ -24,7 +24,7 @@ os_images:
     properties:
       cpu_arch: x64_64
       os_type: windows
-  - name: Windows Server 2019
+  - name: windows-2019-standard-core
     container_format: bare
     disk_format: qcow2
     state: present
@@ -32,7 +32,7 @@ os_images:
     properties:
       cpu_arch: x64_64
       os_type: windows
-  - name: Windows 10
+  - name: windows-10-1809
     container_format: bare
     disk_format: qcow2
     state: present
@@ -40,15 +40,15 @@ os_images:
     properties:
       cpu_arch: x64_64
       os_type: windows
-  - name: CentOS 7 1808
+  - name: centos76-x64-cloud-1901
     container_format: bare
     disk_format: qcow2
     state: present
-    filename: CentOS-7-x86_64-GenericCloud-1808.qcow2
+    filename: CentOS-7-x86_64-GenericCloud-1901.qcow2
     properties:
       cpu_arch: x64_64
       os_type: linux
-  - name: RHEL 7.5
+  - name: rhel75-x64-update-3
     container_format: bare
     disk_format: qcow2
     state: present
