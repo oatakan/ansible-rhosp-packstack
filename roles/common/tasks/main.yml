@@ -26,7 +26,7 @@
     path: "{{ item.path }}"
     state: absent
   loop: "{{ interface_files.files }}"
-  when: not (item.path | regex_replace('^.*ifcfg-','')) in ansible_interfaces | map('replace', '-','_') | list
+  when: not (item.path | regex_replace('^.*ifcfg-','')) in ansible_interfaces
 
 - name: install packages for time sync
   yum:
