@@ -48,11 +48,11 @@ os_images:
     properties:
       cpu_arch: x64_64
       os_type: linux
-  - name: rhel75-x64-update-3
+  - name: rhel76-x64
     container_format: bare
     disk_format: qcow2
     state: present
-    filename: rhel-server-7.5-update-3-x86_64-kvm.qcow2
+    filename: rhel-server-7.6-x86_64-kvm.qcow2
     properties:
       cpu_arch: x64_64
       os_type: linux
