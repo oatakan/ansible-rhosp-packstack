@@ -32,11 +32,11 @@ os_images:
     properties:
       cpu_arch: x64_64
       os_type: windows
-  - name: windows-10-1809
+  - name: windows-10-1903
     container_format: bare
     disk_format: qcow2
     state: present
-    filename: windows-10-1809-cloud-kvm.gz
+    filename: windows-10-1903-cloud-kvm.gz
     properties:
       cpu_arch: x64_64
       os_type: windows
