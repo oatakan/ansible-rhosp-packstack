@@ -1,7 +1,7 @@
 - hosts: all
   become: yes
   vars:
-    openstack_release_name: train
+    openstack_release_name: stein
   tasks:
     - name: set repos for 7.x
       set_fact:
