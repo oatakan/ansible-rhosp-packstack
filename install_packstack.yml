@@ -1,7 +1,7 @@
 - hosts: all
   become: yes
   vars:
-    openstack_release_name: stein
+    openstack_release_name: train
   tasks:
     - name: set repos for 7.x
       set_fact:
@@ -40,6 +40,5 @@
       always:
         - include_role:
             name: oatakan.rhn
-            apply:
-              vars:
-                role_action: unregister
+            vars:
+              role_action: unregister
