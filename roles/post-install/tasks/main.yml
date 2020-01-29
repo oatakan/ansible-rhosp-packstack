@@ -112,8 +112,8 @@
   loop:
     - openstack-nova-compute
     - openstack-nova-conductor
-    - openstack-nova-consoleauth
-    - openstack-nova-api
+#    - openstack-nova-consoleauth
+#    - openstack-nova-api
     - openstack-nova-scheduler
     - openstack-nova-novncproxy
     - openstack-glance-registry

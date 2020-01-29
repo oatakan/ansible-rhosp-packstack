@@ -3,5 +3,6 @@
   roles:
   - ansible-role-rhn
   - common
-  - ansible-role-rhosp-packstack
+  - role: ansible-role-rhosp-packstack
+    openstack_release_name: train
   - post-install
