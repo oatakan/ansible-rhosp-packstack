@@ -40,5 +40,5 @@
       always:
         - include_role:
             name: oatakan.rhn
-            vars:
-              role_action: unregister
+          vars:
+            role_action: unregister
