@@ -21,6 +21,7 @@
           - rhel-8-for-x86_64-appstream-rpms
           - rhel-8-for-x86_64-highavailability-rpms
           - fast-datapath-for-rhel-8-x86_64-rpms
+          - advanced-virt-for-rhel-8-x86_64-rpms
           - openstack-15-for-rhel-8-x86_64-rpms
           - openstack-15-tools-for-rhel-8-x86_64-rpms
           - openstack-15-devtools-for-rhel-8-x86_64-rpms
