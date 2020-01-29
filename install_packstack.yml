@@ -1,8 +1,44 @@
 - hosts: all
   become: yes
-  roles:
-  - ansible-role-rhn
-  - common
-  - role: ansible-role-rhosp-packstack
+  vars:
     openstack_release_name: train
-  - post-install
+  tasks:
+    - name: set repos for 7.x
+      set_fact:
+        repo_channels:
+          - rhel-7-server-rpms
+          - rhel-7-server-rh-common-rpms
+          - rhel-7-server-openstack-14-rpms
+          - rhel-7-server-extras-rpms
+          - rhel-7-server-openstack-14-devtools-rpms
+          - rhel-7-server-optional-rpms
+      when: ansible_os_family == 'RedHat' and ansible_distribution_major_version|int == 7
+
+    - name: set repos for 8.x
+      set_fact:
+        repo_channels:
+          - rhel-8-for-x86_64-baseos-rpms
+          - rhel-8-for-x86_64-appstream-rpms
+          - rhel-8-for-x86_64-highavailability-rpms
+          - fast-datapath-for-rhel-8-x86_64-rpms
+          - openstack-15-for-rhel-8-x86_64-rpms
+          - openstack-15-tools-for-rhel-8-x86_64-rpms
+          - openstack-15-devtools-for-rhel-8-x86_64-rpms
+      when: ansible_os_family == 'RedHat' and ansible_distribution_major_version|int == 8
+
+    - block:
+        - include_role:
+            name: "{{ role_name }}"
+          loop_control:
+            loop_var: role_name
+          loop:
+            - oatakan.rhn
+            - ansible-role-rhosp-packstack
+            - post-install
+
+      always:
+        - include_role:
+            name: oatakan.rhn
+            apply:
+              vars:
+                role_action: unregister
