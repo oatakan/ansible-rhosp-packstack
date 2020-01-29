@@ -7,4 +7,8 @@
 - src: https://github.com/oatakan/ansible-role-rhosp-packstack
   version: origin/master
 
-- src: oatakan.rhn
+- src: https://github.com/oatakan/ansible-role-rhn.git
+  version: origin/master
+  name: oatakan.rhn
+
+#- src: oatakan.rhn
