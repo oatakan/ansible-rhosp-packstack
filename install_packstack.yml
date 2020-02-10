@@ -1,7 +1,8 @@
 - hosts: all
   become: yes
   vars:
-    openstack_release_name: stein
+    openstack_release_name: train
+    openstack_rhel_version: 16
   tasks:
     - name: set repos for 7.x
       set_fact:
@@ -22,9 +23,9 @@
           - rhel-8-for-x86_64-highavailability-rpms
           - fast-datapath-for-rhel-8-x86_64-rpms
           - advanced-virt-for-rhel-8-x86_64-rpms
-          - openstack-15-for-rhel-8-x86_64-rpms
-          - openstack-15-tools-for-rhel-8-x86_64-rpms
-          - openstack-15-devtools-for-rhel-8-x86_64-rpms
+          - openstack-{{ openstack_rhel_version }}-for-rhel-8-x86_64-rpms
+          - openstack-{{ openstack_rhel_version }}-tools-for-rhel-8-x86_64-rpms
+          - openstack-{{ openstack_rhel_version }}-devtools-for-rhel-8-x86_64-rpms
       when: ansible_os_family == 'RedHat' and ansible_distribution_major_version|int == 8
 
     - block:
