@@ -43,3 +43,5 @@
             name: oatakan.rhn
           vars:
             role_action: unregister
+          when:
+            - rhn_debug is not defined or not rhn_debug | bool
