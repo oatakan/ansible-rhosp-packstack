@@ -2,7 +2,7 @@
   become: yes
   tasks:
     - name: gather facts on images
-      os_image_facts:
+      openstack.cloud.image_info:
       delegate_to: localhost
       become: no
       ignore_errors: yes
