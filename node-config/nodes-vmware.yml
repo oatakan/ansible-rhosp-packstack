@@ -7,6 +7,12 @@ providers:
 
 nodes:
   - name: rhosp1
+    role: openstack
+    app_name: rhosp_standalone
+    environment: dev
+    disk:
+      - size_gb: 300
+        autoselect_datastore: yes
     networks:
     - name: mgmt
       ip: 192.168.1.54
@@ -21,8 +27,8 @@ nodes:
       dns_servers:
       - 192.168.1.254
       - 8.8.4.4
+      password: '{{ ansible_password | default(ansible_ssh_password) }}'
     memory: 12288
     cpu: 2
-    template: "{{ infra_template_name|default('centos82-x64-se_bigdisk_v1') }}"
-    snapshot_src: Linked
-    linked_clone: True
+    nested_virt: yes
+    template: "{{ infra_template_name|default('rocky85-x64-v1') }}"

@@ -1,8 +1,9 @@
 ---
 nodes:
   - name: rhosp
-    role: rhosp
+    role: openstack
     app_name: rhosp_standalone
+    environment: dev
     instance_type: t2.micro
     image: ami-85241def #rhel7
     volumes:
