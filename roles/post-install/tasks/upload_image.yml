@@ -3,7 +3,8 @@
 - name: check if image exists
   shell: source /root/keystonerc_admin && openstack image list | grep "{{ os_image.name }}" | grep active
   register: check_image
-  ignore_errors: yes
+  failed_when: false
+  changed_when: false
 
 
 #- name: extract images
@@ -28,13 +29,13 @@
 - name: upload images non gz
   shell: source /root/keystonerc_admin && glance image-create --file "/{{ image_location }}/{{ os_image.filename }}" --name "{{ os_image.name }}" --container-format "{{ os_image.container_format }}" --disk-format "{{ os_image.disk_format }}" --property os_type="{{ os_image.properties['os_type'] }}"
   when:
-    - not check_image is success
+    - check_image.rc !=0
     - not os_image.filename | regex_search('.*\.gz$')
 
 - name: upload images gz
   shell: source /root/keystonerc_admin && gunzip -cd "{{ image_location }}/{{ os_image.filename }}" | glance image-create --name "{{ os_image.name }}" --container-format "{{ os_image.container_format }}" --disk-format "{{ os_image.disk_format }}" --property os_type="{{ os_image.properties['os_type'] }}"
   when:
-    - not check_image is success
+    - check_image.rc !=0
     - os_image.filename | regex_search('.*\.gz$')
 
 #- name: upload images gz
