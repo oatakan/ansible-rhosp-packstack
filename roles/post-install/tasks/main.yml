@@ -116,7 +116,7 @@
 #    - openstack-nova-api
     - openstack-nova-scheduler
     - openstack-nova-novncproxy
-    - openstack-glance-registry
+#    - openstack-glance-registry
     - openstack-glance-api
     - openstack-cinder-backup
     - openstack-cinder-scheduler
