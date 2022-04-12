@@ -1,6 +1,10 @@
-- hosts: localhost
-  become: no
+- name: remove vm
+  hosts: all
+  gather_facts: false
+  connection: local
+  become: false
   vars_files:
     - node-config/nodes-vmware.yml
+
   roles:
-    - ansible-role-vmware
+  - ansible-role-vmware
