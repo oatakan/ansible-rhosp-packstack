@@ -40,14 +40,6 @@ os_images:
     properties:
       cpu_arch: x64_64
       os_type: windows
-  - name: centos76-x64-cloud-1901
-    container_format: bare
-    disk_format: qcow2
-    state: present
-    filename: CentOS-7-x86_64-GenericCloud-1901.qcow2
-    properties:
-      cpu_arch: x64_64
-      os_type: linux
   - name: rhel76-x64
     container_format: bare
     disk_format: qcow2
