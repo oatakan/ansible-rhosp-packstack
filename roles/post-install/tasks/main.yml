@@ -84,25 +84,26 @@
     var: openstack_image
   when: openstack_image is defined
 
-- name: mount share if applicable
-  mount:
-    path: /mnt
-    src: "{{ nfs_share }}"
-    fstype: nfs
-    opts: nolock
-    state: mounted
-  when: nfs_share is defined
+- block:
+    - name: mount share if applicable
+      mount:
+        path: /mnt
+        src: "{{ nfs_share }}"
+        fstype: nfs
+        opts: nolock
+        state: mounted
+      when: nfs_share is defined
 
-- include: upload_image.yml os_image='{{ include_item }}'
-  loop: '{{ os_images }}'
-  loop_control:
-    loop_var: include_item
-
-- name: unmount share if applicable
-  mount:
-    path: /mnt
-    state: unmounted
-  when: nfs_share is defined
+    - include: upload_image.yml os_image='{{ include_item }}'
+      loop: '{{ os_images }}'
+      loop_control:
+        loop_var: include_item
+  always:
+    - name: unmount share if applicable
+      mount:
+        path: /mnt
+        state: unmounted
+      when: nfs_share is defined
 
 # for osp-13 installation, need to restart nova and cinder services
 - name: restart services
