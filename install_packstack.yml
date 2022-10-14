@@ -1,8 +1,8 @@
 - hosts: all
   become: yes
   vars:
-    openstack_release_name: train
-    openstack_rhel_version: 16
+    openstack_release_name: yoga
+    openstack_rhel_version: 17
   tasks:
     - name: set repos for 7.x
       set_fact:
@@ -23,10 +23,23 @@
           - rhel-8-for-x86_64-highavailability-rpms
           - fast-datapath-for-rhel-8-x86_64-rpms
           - advanced-virt-for-rhel-8-x86_64-rpms
+          - codeready-builder-for-rhel-8-x86_64-rpms
           - openstack-{{ openstack_rhel_version }}-for-rhel-8-x86_64-rpms
           - openstack-{{ openstack_rhel_version }}-tools-for-rhel-8-x86_64-rpms
           - openstack-{{ openstack_rhel_version }}-devtools-for-rhel-8-x86_64-rpms
       when: ansible_os_family == 'RedHat' and ansible_distribution_major_version|int == 8
+
+    - name: set repos for 9.x
+      set_fact:
+        repo_channels:
+          - rhel-9-for-x86_64-baseos-rpms
+          - rhel-9-for-x86_64-appstream-rpms
+          - rhel-9-for-x86_64-highavailability-rpms
+          - fast-datapath-for-rhel-9-x86_64-rpms
+          - codeready-builder-for-rhel-9-x86_64-rpms
+          - openstack-{{ openstack_rhel_version }}-for-rhel-9-x86_64-rpms
+          - openstack-{{ openstack_rhel_version }-tools-for-rhel-9-x86_64-rpms
+      when: ansible_os_family == 'RedHat' and ansible_distribution_major_version|int == 9
 
     - block:
         - include_role:
