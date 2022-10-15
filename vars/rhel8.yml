@@ -1,0 +1,16 @@
+---
+
+base_repos:
+  - rhel-8-for-x86_64-baseos-rpms
+  - rhel-8-for-x86_64-appstream-rpms
+  - rhel-8-for-x86_64-highavailability-rpms
+  - fast-datapath-for-rhel-8-x86_64-rpms
+  - advanced-virt-for-rhel-8-x86_64-rpms
+  - codeready-builder-for-rhel-8-x86_64-rpms
+
+openstack_repos:
+  - openstack-{{ openstack_rhel_version }}-for-rhel-8-x86_64-rpms
+  - openstack-{{ openstack_rhel_version }}-tools-for-rhel-8-x86_64-rpms
+  - openstack-{{ openstack_rhel_version }}-devtools-for-rhel-8-x86_64-rpms
+
+repo_channels: "{{ base_repos + ( openstack_repos if openstack_rhel_version in [15,16] else [] ) }}"

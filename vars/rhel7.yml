@@ -1,0 +1,13 @@
+---
+
+base_repos:
+  - rhel-7-server-rpms
+  - rhel-7-server-rh-common-rpms
+  - rhel-7-server-extras-rpms
+  - rhel-7-server-optional-rpms
+
+openstack_repos:
+  - rhel-7-server-openstack-14-rpms
+  - rhel-7-server-openstack-14-devtools-rpms
+
+repo_channels: "{{ base_repos + ( openstack_repos if openstack_rhel_version in [14] else [] ) }}"
