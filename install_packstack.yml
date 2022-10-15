@@ -41,6 +41,15 @@
           - openstack-{{ openstack_rhel_version }}-tools-for-rhel-9-x86_64-rpms
       when: ansible_os_family == 'RedHat' and ansible_distribution_major_version|int == 9
 
+    - name: enable RDO release
+      dnf:
+        name: https://www.rdoproject.org/repos/rdo-release.el{{ ansible_distribution_major_version }}.rpm
+        disable_gpg_check: yes
+        state: present
+      when:
+        - ansible_os_family == 'RedHat'
+        - ansible_distribution_major_version|int in [8,9] or openstack_rhel_version >= 17
+
     - block:
         - include_role:
             name: "{{ role_name }}"
