@@ -22,7 +22,8 @@
         state: present
       when:
         - ansible_os_family == 'RedHat'
-        - ansible_distribution_major_version|int in [8,9] or openstack_rhel_version >= 17
+        - ansible_distribution_major_version|int in [8,9]
+        - openstack_rhel_version >= 17
 
     - block:
         - include_role:
