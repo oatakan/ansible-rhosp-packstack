@@ -13,7 +13,7 @@
             - rhel9.yml
           paths:
             - 'vars'
-      when: ansible_os_family == 'RedHat'
+      when: ansible_distribution == 'RedHat'
 
     - name: enable RDO release
       dnf:
@@ -21,7 +21,7 @@
         disable_gpg_check: yes
         state: present
       when:
-        - ansible_os_family == 'RedHat'
+        - ansible_distribution == 'RedHat'
         - ansible_distribution_major_version|int in [8,9]
         - openstack_rhel_version >= 17
 
