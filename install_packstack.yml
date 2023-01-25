@@ -26,6 +26,12 @@
         - openstack_rhel_version >= 17
 
     - block:
+        - name: disable firewall
+          service:
+            name: firewalld
+            state: stopped
+            enabled: no
+
         - include_role:
             name: "{{ role_name }}"
           loop_control:
