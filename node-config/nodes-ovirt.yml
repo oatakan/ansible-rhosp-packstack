@@ -1,0 +1,32 @@
+---
+providers:
+  ovirt:
+    cluster: production
+
+nodes:
+  - name: rhosp2
+    role: openstack
+    app_name: rhosp_standalone
+    environment: dev
+    networks:
+    - name: ovirtmgmt
+      ip: 192.168.1.64
+      netmask: 255.255.255.0
+      gateway: 192.168.1.254
+      device_name: enp3s0
+      domain: home.ad
+      dns_servers:
+      - 8.8.8.8
+      - 8.8.4.4
+    disks:
+    - name: "{{ infra_template_name|default('rocky91-x64-v1') }}"
+      name_prefix: no
+      size: 300GiB
+    memory: 36864
+    cpu_cores: 10
+    cpu: 1
+    cpu_threads: 2
+    cpu_mode: host_passthrough
+    user_name: root
+    root_password: '{{ ansible_password | default(ansible_ssh_password) | default("password") }}'
+    template: "{{ infra_template_name|default('rocky91-x64-v1') }}"
