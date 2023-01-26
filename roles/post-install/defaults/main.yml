@@ -32,28 +32,28 @@ os_images:
     properties:
       cpu_arch: x64_64
       os_type: windows
-  - name: windows-10-1903
-    container_format: bare
-    disk_format: qcow2
-    state: present
-    filename: windows-10-1903-cloud-kvm.gz
-    properties:
-      cpu_arch: x64_64
-      os_type: windows
-  - name: rhel76-x64
-    container_format: bare
-    disk_format: qcow2
-    state: present
-    filename: rhel-server-7.6-x86_64-kvm.qcow2
-    properties:
-      cpu_arch: x64_64
-      os_type: linux
-  - name: rhel80-x64
-    container_format: bare
-    disk_format: qcow2
-    state: present
-    filename: rhel-8.0-x86_64-kvm.qcow2
-    properties:
-      cpu_arch: x64_64
-      os_type: linux
+#  - name: windows-10-1903
+#    container_format: bare
+#    disk_format: qcow2
+#    state: present
+#    filename: windows-10-1903-cloud-kvm.gz
+#    properties:
+#      cpu_arch: x64_64
+#      os_type: windows
+#  - name: rhel76-x64
+#    container_format: bare
+#    disk_format: qcow2
+#    state: present
+#    filename: rhel-server-7.6-x86_64-kvm.qcow2
+#    properties:
+#      cpu_arch: x64_64
+#      os_type: linux
+#  - name: rhel80-x64
+#    container_format: bare
+#    disk_format: qcow2
+#    state: present
+#    filename: rhel-8.0-x86_64-kvm.qcow2
+#    properties:
+#      cpu_arch: x64_64
+#      os_type: linux
 
