@@ -1,0 +1,33 @@
+---
+
+nodes:
+  - name: rhosp3
+    role: openstack
+    app_name: rhosp_standalone
+    environment: dev
+    networks:
+      - name: ovs-net-br1
+        ip: 192.168.1.80
+        netmask: 255.255.255.0
+        gateway: 192.168.1.254
+        nic_name: enp1s0
+        domain: home.ad
+        dns_servers:
+          - 192.168.1.254
+          - 8.8.4.4
+    disks:
+      - name: rhosp3-disk0
+        size: 150GiB
+    ports:
+      - port: 443
+        route: yes
+        secure: yes
+      - port: 5000
+        route: yes
+        secure: yes
+    domain: home.ad
+    memory: 12288
+    cpu: 2
+    user_name: root
+    root_password: '{{ ansible_password | default(local_ansible_password) | default("password") }}'
+    template: "{{ infra_template_name | default('rocky91-x64-v1') }}"
