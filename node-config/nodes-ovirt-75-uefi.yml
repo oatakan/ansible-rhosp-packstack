@@ -19,18 +19,18 @@ nodes:
       - 8.8.8.8
       - 8.8.4.4
     disks:
-    - name: "{{ infra_template_name|default('rhel92-x64-v1') }}"
+    - name: "{{ infra_template_name|default('rhel92-efi-x64-v1') }}"
       name_prefix: no
-      size: 300GiB
+      size: 200GiB
     domain: home.ad
     dns_servers:
     - 192.168.1.254
     - 8.8.4.4
-    memory: 36864
-    cpu_cores: 3
+    memory: 18432
+    cpu_cores: 2
     cpu: 1
     cpu_threads: 2
     cpu_mode: host_passthrough
     user_name: root
     root_password: '{{ ansible_password | default(ansible_ssh_password) | default("password") }}'
-    template: "{{ infra_template_name|default('rhel92-x64-v1') }}"
+    template: "{{ infra_template_name|default('rhel92-efi-x64-v1') }}"

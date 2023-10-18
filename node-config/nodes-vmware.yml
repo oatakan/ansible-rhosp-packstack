@@ -31,4 +31,4 @@ nodes:
     memory: 12288
     cpu: 2
     nested_virt: yes
-    template: "{{ infra_template_name|default('rocky85-x64-v1') }}"
+    template: "{{ infra_template_name|default('rhel92-x64-v1') }}"
